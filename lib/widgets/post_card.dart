@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/utils/colors.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({Key? key}) : super(key: key);
+  final snap;
+  const PostCard({Key? key, required this.snap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +22,10 @@ class PostCard extends StatelessWidget {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 23,
+                  radius: 20,
                   backgroundImage: NetworkImage(
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3VQ39-knLeRIC1OYfiMD59b58YTg77jmH8w&usqp=CAU"),
+                    snap['profImg'],
+                  ),
                 ),
                 Expanded(
                   child: Padding(
@@ -33,7 +37,7 @@ class PostCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'username',
+                          snap['username'],
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -80,7 +84,7 @@ class PostCard extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.35,
             width: double.infinity,
             child: Image.network(
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3VQ39-knLeRIC1OYfiMD59b58YTg77jmH8w&usqp=CAU",
+              snap['posrUrl'],
               fit: BoxFit.cover,
             ),
           ),
@@ -127,10 +131,58 @@ class PostCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '2,343 likes',
-                  style: Theme.of(context).textTheme.bodyText2,
+                DefaultTextStyle(
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                  child: Text(
+                    '223 likes',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
                 ),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(top: 8),
+                  child: RichText(
+                    text: TextSpan(
+                        style: const TextStyle(color: Colors.white),
+                        children: [
+                          TextSpan(
+                            text: 'username',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text:
+                                ' Hey this is some description to be replaced',
+                          ),
+                        ]),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Text(
+                      'View all 13 comments',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: secondaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 1),
+                  child: Text(
+                    '22/12/2022',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: secondaryColor,
+                    ),
+                  ),
+                )
               ],
             ),
           ),
